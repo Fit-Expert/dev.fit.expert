@@ -22,8 +22,8 @@
           </thead>
           <tbody>
             <tr>
-              <td>{{ Auth::user()->name }}</td>
-              <td>{{ Auth::user()->email }}</td>
+              <td>{{ Auth::guard('web')->user()->name }}</td>
+              <td>{{ Auth::guard('web')->user()->email }}</td>
               <td>
                 <a href="{{ route('user.logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
                 <form action="{{ route('user.logout') }}" method="post" class="d-none" id="logout-form">@csrf</form>
