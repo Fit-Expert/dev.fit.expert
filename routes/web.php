@@ -14,6 +14,28 @@ use App\Http\Controllers\User\UserController;
 |
 */
 
+
+/*
+|--------------------------------------------------------------------------
+| Admin Routes
+|--------------------------------------------------------------------------
+*/
+
+
+Route::get('admin/login','Auth\AdminAuthController@getLogin')->name('adminLogin');
+Route::post('admin/login', 'Auth\AdminAuthController@postLogin')->name('adminLoginPost');
+Route::get('admin/logout', 'Auth\AdminAuthController@logout')->name('adminLogout');
+
+Route::group(['prefix' => 'admin','middleware' => 'adminauth'], function (){
+
+	Route::get('dashboard','AdminController@dashboard')->name('dashboard');	
+    Route::get('calendar','AdminCalenderController@index')->name('calendar');
+    Route::post('calendarAjax','AdminCalenderController@ajax')->name('ajaxcalendar');
+
+});
+
+
+
 Route::get('/', function () {
     return view('welcome');
 });
