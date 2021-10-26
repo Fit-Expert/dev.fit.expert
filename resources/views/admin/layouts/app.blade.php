@@ -37,9 +37,9 @@ div#calendarFull {
     width: 70%;
 }
 
-.fc-toolbar .fc-right {
+/*.fc-toolbar .fc-right {
     display: none;
-}
+}*/
 
 div#calendarFull .fc-widget-content:first-of-type, .fc-widget-header:first-of-type {
     border-left: 1px solid #ddd;
@@ -873,7 +873,7 @@ $.ajaxSetup({
         center: 'title',
         right: 'month,agendaWeek,agendaDay'
     },
-    defaultView: 'month',
+    defaultView: 'agendaDay',
     editable: true,
     eventSources: [
       {
@@ -991,10 +991,11 @@ $.ajaxSetup({
                       }
                     }
                 });
+                $('#calendarFull').fullCalendar('removeEvents', event.id);
+            $(this).hide();
             }
             ///$('#calendarFull').fullCalendar('destroy');
-            $('#calendarFull').fullCalendar('removeEvents', event.id);
-            $(this).hide();
+           
             // $('#calendar').fullCalendar('refetchEvents');
             //$('#calendarFull').fullCalendar('refresh');
         },
