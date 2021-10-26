@@ -865,8 +865,8 @@ $.ajaxSetup({
         events: [
           <?php echo $allevents; ?>
         ],
-        color: "black", // an option!
-        textColor: "yellow" // an option!
+        color: "#3a87ad", // blue color!
+        textColor: "#fff" // white color!
       }
     ],
     select: function( start, end, jsEvent, view ) {
@@ -885,9 +885,12 @@ $.ajaxSetup({
         bind event submit. Will perform a ajax call in order to save the event to the database.
         When save is successful, close modal dialog and refresh fullcalendar.
         */
-   
-        $("#jaipalyadav").click(function(){
+        var count = 0;
+        $("#jaipalyadav").click(function(e){
 
+          count += 1;
+
+          if(count==1){
           $.ajax({
                 url: '<?php echo $ajaxurl; ?>',
                 data: $("#save-event").serialize(),
@@ -895,21 +898,22 @@ $.ajaxSetup({
                 dataType: 'json',
                 success: function(response) {
 
-                  if(response=="Datainserted")
-                  {
+                     $('#event-modal').find('input[name=title]').val('');
                       $("#event-modal").modal('hide');
-                      //alert('Event created!');
-                       location.reload();
-                      // $('#calendarFull').fullCalendar('rerenderEvents');
-                      //$('#calendarFull').fullCalendar('refetchEvents');
-                      return false;
-                  }
-            
+                      
+                      $('#calendarFull').fullCalendar('renderEvent', {
+                      id: response.id,
+                      title: response.title,
+                      start: response.start
+                     // allDay: true
+                     });
+                     
                 }
-                
             });
-        });      
+          }
 
+        }); 
+  
     },
 
     eventDrop: function (event, data) {
@@ -941,7 +945,7 @@ $.ajaxSetup({
               if(response=="DataUpdated")
               {
                   alert('Event Updated!');
-                  location.reload();
+                 // location.reload();
                   //$('#calendarFull').fullCalendar('rerenderEvents');
                  // $('#calendarFull').fullCalendar('refetchEvents');
                   return false;
@@ -965,7 +969,7 @@ $.ajaxSetup({
                       if(response=="DataDeleted")
                       {
                           //alert('Event Deleted!');
-                          location.reload();
+                          //location.reload();
                           //$('#calendarFull').fullCalendar('rerenderEvents');
                           //$('#calendarFull').fullCalendar('removeEventSources');
                           return false;
@@ -973,11 +977,17 @@ $.ajaxSetup({
                     }
                 });
             }
+            ///$('#calendarFull').fullCalendar('destroy');
+            $('#calendarFull').fullCalendar('removeEvents', event.id);
+            $(this).hide();
+            // $('#calendar').fullCalendar('refetchEvents');
+            //$('#calendarFull').fullCalendar('refresh');
         },
-    selectHelper: true,
-    selectable: true,
-    snapDuration: '00:10:00'
+        selectHelper: true,
+        selectable: true,
+        snapDuration: '00:10:00'
 });
+
 </script>
 
 <?php

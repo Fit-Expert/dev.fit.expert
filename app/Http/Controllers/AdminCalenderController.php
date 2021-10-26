@@ -23,7 +23,11 @@ class AdminCalenderController extends Controller
             $evensave->evtStart = $evtStart;
             $evensave->evtEnd = $evtEnd;
             $evensave->save();
-            echo json_encode('Datainserted');
+            $eventid=$evensave->id;
+            
+            $arr=array('id'=>$eventid,'title'=>$title,'start'=>$evtStart);
+            echo json_encode($arr);
+            //echo json_encode('Datainserted');
             die();
         }
         elseif($request->type=="update")
