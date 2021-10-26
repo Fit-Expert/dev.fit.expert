@@ -31,12 +31,27 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.1.1/fullcalendar.css">
  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
+<style>
 
+div#calendarFull {
+    width: 70%;
+}
+
+.fc-toolbar .fc-right {
+    display: none;
+}
+
+div#calendarFull .fc-widget-content:first-of-type, .fc-widget-header:first-of-type {
+    border-left: 1px solid #ddd;
+}
+
+div#calendarFull .fc-widget-content:last-of-type, .fc-widget-header:last-of-type{border-right: 1px solid #ddd;}
+
+  </style>
 
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
-
   <!-- Preloader -->
   <!--<div class="preloader flex-column justify-content-center align-items-center">
     <img class="animation__shake" src="{{ asset('public/admin_assets/dist/img/AdminLTELogo.png')}}" alt="AdminLTELogo" height="60" width="60">
