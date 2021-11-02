@@ -21,13 +21,18 @@ use App\Http\Controllers\User\UserController;
 |--------------------------------------------------------------------------
 */
 
-
+//==========================Admin Login Route==============================//
 Route::get('admin/login','Auth\AdminAuthController@getLogin')->name('adminLogin');
 Route::post('admin/login', 'Auth\AdminAuthController@postLogin')->name('adminLoginPost');
 Route::get('admin/logout', 'Auth\AdminAuthController@logout')->name('adminLogout');
 
-Route::group(['prefix' => 'admin','middleware' => 'adminauth'], function (){
+//==========================Admin Registration Route==============================//
+Route::get('admin/registration','Auth\AdminAuthController@getRegister')->name('adminRegister');
+Route::post('admin/registration', 'Auth\AdminAuthController@postRegister')->name('adminRegisterPost');
 
+
+Route::group(['prefix' => 'admin','middleware' => 'adminauth'], function (){
+    
 	Route::get('dashboard','AdminController@dashboard')->name('dashboard');	
     Route::get('calendar','AdminCalenderController@index')->name('calendar');
     Route::post('calendarAjax','AdminCalenderController@ajax')->name('ajaxcalendar');
