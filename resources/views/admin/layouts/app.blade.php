@@ -1,7 +1,7 @@
 
 <?php
 use App\Models\Admin;
-use URL;
+//use URL;
 $userid=auth()->guard('admin')->user()->id;
 $userDetails = Admin::where('id', $userid)->first();
 ?>

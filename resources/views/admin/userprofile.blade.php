@@ -1,12 +1,19 @@
 @extends('admin.layouts.app')
 @section('content')
-
  <!-- Main content -->
+
+ <style>
+   .card-title{
+    float: none!important;
+    text-align: center!important;
+    font-size: 2.1rem!important;
+   }
+   </style>
  <section class="content">
-      <div class="container-fluid">
+      <div class="container-fluid" style="margin-top: -30px!important;">
         <div class="row">
           <!-- left column -->
-          <div class="col-md-8">
+          <div class="col-md-6">
             <!-- general form elements -->
             
             <div class="card card-primary">
@@ -14,7 +21,6 @@
                 <h3 class="card-title">Update Your Profile</h3>
 
               </div>
-
 
               <form method="post" action="{{ route('Admin-Profile-Store') }}" enctype="multipart/form-data">
               {!! csrf_field() !!}
@@ -52,11 +58,20 @@
                     <input type="password" name="ConfirmPassword" class="form-control" id="exampleInputPassword" placeholder="Password">
                   </div>
 
+                  <div class="form-group">
+                    <label for="exampleInputPassword">Confirm Password</label>
+                    <input type="password" name="ConfirmPassword" class="form-control" id="exampleInputPassword" placeholder="Password">
+                  </div>
+
+                  <div class="form-group">
+                  <button type="submit" class="btn btn-primary">Update</button>
+                  </div>
+
                 </div>
 
-                <div class="card-footer">
+                <!---<div class="card-footer">
                   <button type="submit" class="btn btn-primary">Update</button>
-                </div>
+                </div>-->
 
                 @if(session()->has('profilesuccess'))
                 <div style="color:green; text-align: center;">
@@ -77,6 +92,8 @@
               </form>
             </div>
           </div>
+
+          
         </div>
       </div>
     </section>

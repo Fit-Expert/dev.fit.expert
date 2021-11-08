@@ -8,6 +8,7 @@ use App\Models\Admin;
 use Illuminate\Support\Facades\Validator;
 use Session;
 use Illuminate\Support\Facades\File; 
+use Image;
 
 class AdminController extends Controller
 {
@@ -94,9 +95,17 @@ class AdminController extends Controller
             }
             
             $image = $request->file('user_pic');
-            $name = time().'.'.$image->getClientOriginalExtension();
+            //$name = time().'.'.$image->getClientOriginalExtension();
+            $name = time().'.'.$image->extension();
+
+            $img = Image::make($image->path());
             $destinationPath = public_path('/admin_pics');
-            $image->move($destinationPath, $name); 
+
+            $img->resize(700, 700, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($destinationPath.'/'.$name);
+
+            //$image->move($destinationPath, $name); 
             $updatearr['user_pic']=$name;
         }
 
