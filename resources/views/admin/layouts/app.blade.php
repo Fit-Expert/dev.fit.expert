@@ -80,20 +80,12 @@ div#calendarFull .fc-widget-content:last-of-type, .fc-widget-header:last-of-type
 
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <ul>
-          <li>
           <a class="nav-link" href="{{route('adminLogout')}}" >
           Logout
         </a>
           </li>
-          <li>
-          <a class="nav-link" href="{{route('Admin-Profile')}}" >
-          Profile
-        </a>
-          </li>
-      </ul>
-      </li>
-    </ul>
+        <ul>
+ 
 
 
   </nav>
@@ -150,13 +142,24 @@ div#calendarFull .fc-widget-content:last-of-type, .fc-widget-header:last-of-type
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <li class="nav-item menu-open">
-            <a href="{{ route('dashboard') }}" class="nav-link <?php if(Request::path()!="admin/calendar"){ echo 'active'; } ?>">
+          
+        
+        <li class="nav-item menu-open">
+            <a href="{{ route('dashboard') }}" class="nav-link <?php if(Request::path()=="admin/dashboard"){ echo 'active'; } ?>">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>Dashboard</p>
             </a>
-
           </li>
+
+          <li class="nav-item">
+            <a href="{{route('Admin-Profile')}}" class="nav-link <?php if(Request::path()=="admin/profile"){ echo 'active'; } ?>">
+              <i class="nav-icon fas fa-user"></i>
+              <p>
+                My Profile
+              </p>
+            </a>
+          </li>
+
 
           <li class="nav-item">
             <a href="{{ route('calendar') }}" class="nav-link <?php if(Request::path()=="admin/calendar"){ echo 'active'; } ?>">
