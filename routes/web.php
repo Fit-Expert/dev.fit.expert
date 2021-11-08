@@ -36,6 +36,8 @@ Route::group(['prefix' => 'admin','middleware' => 'adminauth'], function (){
 	Route::get('dashboard','AdminController@dashboard')->name('dashboard');	
     Route::get('calendar','AdminCalenderController@index')->name('calendar');
     Route::post('calendarAjax','AdminCalenderController@ajax')->name('ajaxcalendar');
+    Route::get('profile','AdminController@profile')->name('Admin-Profile');
+    Route::post('profile/store','AdminController@storeprofile')->name('Admin-Profile-Store');
 
 });
 

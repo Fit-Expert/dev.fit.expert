@@ -56,13 +56,24 @@
         <a href="#" class="nav-link">Contact</a>
       </li>-->
     </ul>
+    
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <a class="nav-link" href="{{route('adminLogout')}}" >
+        <ul>
+          <li>
+          <a class="nav-link" href="{{route('adminLogout')}}" >
           Logout
         </a>
+          </li>
+          <li>
+          <a class="nav-link" href="{{route('adminLogout')}}" >
+          Logout23
+        </a>
+          </li>
+      </ul>
       </li>
     </ul>
+
   </nav>
 
 

@@ -1,3 +1,10 @@
+
+<?php
+use App\Models\Admin;
+use URL;
+$userid=auth()->guard('admin')->user()->id;
+$userDetails = Admin::where('id', $userid)->first();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,7 +12,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
    <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>Admin</title>
-
 
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 
@@ -71,13 +77,25 @@ div#calendarFull .fc-widget-content:last-of-type, .fc-widget-header:last-of-type
         <a href="#" class="nav-link">Contact</a>
       </li>-->
     </ul>
+
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <a class="nav-link" href="{{route('adminLogout')}}" >
+        <ul>
+          <li>
+          <a class="nav-link" href="{{route('adminLogout')}}" >
           Logout
         </a>
+          </li>
+          <li>
+          <a class="nav-link" href="{{route('Admin-Profile')}}" >
+          Profile
+        </a>
+          </li>
+      </ul>
       </li>
     </ul>
+
+
   </nav>
 
 
@@ -94,10 +112,26 @@ div#calendarFull .fc-widget-content:last-of-type, .fc-widget-header:last-of-type
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="{{ asset('public/admin_assets/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
+
+          <?php 
+          
+          if($userDetails->user_pic!="")
+          {
+            $filepath=URL::to('/').'/public/admin_pics/'.$userDetails->user_pic;
+            ?>
+            <img src="{{$filepath}}" class="img-circle elevation-2" alt="User Image">
+            <?php
+          }else{
+          ?>
+            <img src="{{ asset('public/admin_assets/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
+            <?php
+          }
+          ?>
         </div>
         <div class="info">
-          <a href="{{ route('dashboard') }}" class="d-block">Admin</a>
+          <a href="{{ route('dashboard') }}" class="d-block">
+            <?php echo ucfirst($userDetails->name); echo '<br/>'; echo ucfirst($userDetails->usertype); ?>
+          </a>
         </div>
       </div>
 
